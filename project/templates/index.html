@@ -24,5 +24,9 @@
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
+    {% if price_prediction %}
+      <p class="fs-4 my-3">Price prediction: €{{ price_prediction }}</p>
+    {% endif %}
+
   </div>
 {% endblock %}

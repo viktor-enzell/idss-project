@@ -1,4 +1,13 @@
+import pickle
+
 from django import forms
+from django.conf import settings
+
+house_price_categories = pickle.load(open(f'{settings.BASE_DIR}/models/house_price_feature_categories.sav', 'rb'))
+
+
+def choices_from_array(array):
+    return [(x, x) for x in array]
 
 
 class ApartmentInfoForm(forms.Form):
@@ -7,13 +16,73 @@ class ApartmentInfoForm(forms.Form):
         widget=forms.TextInput(attrs={
             'type': 'number',
             'class': 'form-control',
-            'placeholder': 'Enter price...'
         })
     )
-
-    area = forms.ChoiceField(
+    district = forms.ChoiceField(
         required=True,
-        choices=(('gracia', 'Gracia'), ('eixample', 'Eixample'),),
+        choices=choices_from_array(house_price_categories['district']),
+        widget=forms.Select(attrs={
+            'type': 'text',
+            'class': 'form-select'
+        })
+    )
+    neighborhood = forms.ChoiceField(
+        required=True,
+        choices=choices_from_array(house_price_categories['neighborhood']),
+        widget=forms.Select(attrs={
+            'type': 'text',
+            'class': 'form-select'
+        })
+    )
+    condition = forms.ChoiceField(
+        required=True,
+        choices=choices_from_array(house_price_categories['condition']),
+        widget=forms.Select(attrs={
+            'type': 'text',
+            'class': 'form-select'
+        })
+    )
+    type = forms.ChoiceField(
+        required=True,
+        choices=choices_from_array(house_price_categories['type']),
+        widget=forms.Select(attrs={
+            'type': 'text',
+            'class': 'form-select'
+        })
+    )
+    rooms = forms.IntegerField(
+        required=True,
+        widget=forms.TextInput(attrs={
+            'type': 'number',
+            'class': 'form-control',
+        })
+    )
+    area_m2 = forms.IntegerField(
+        required=True,
+        widget=forms.TextInput(attrs={
+            'type': 'number',
+            'class': 'form-control',
+        })
+    )
+    lift = forms.ChoiceField(
+        required=True,
+        choices=choices_from_array(house_price_categories['lift']),
+        widget=forms.Select(attrs={
+            'type': 'text',
+            'class': 'form-select'
+        })
+    )
+    views = forms.ChoiceField(
+        required=True,
+        choices=choices_from_array(house_price_categories['views']),
+        widget=forms.Select(attrs={
+            'type': 'text',
+            'class': 'form-select'
+        })
+    )
+    floor = forms.ChoiceField(
+        required=True,
+        choices=choices_from_array(house_price_categories['floor']),
         widget=forms.Select(attrs={
             'type': 'text',
             'class': 'form-select'
