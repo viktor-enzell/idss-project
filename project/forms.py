@@ -4,6 +4,7 @@ from django import forms
 from django.conf import settings
 
 house_price_categories = pickle.load(open(f'{settings.BASE_DIR}/models/house_price_feature_categories.sav', 'rb'))
+rent_categories = pickle.load(open(f'{settings.BASE_DIR}/models/rent_feature_categories.sav', 'rb'))
 
 
 def choices_from_array(array):
@@ -50,6 +51,14 @@ class ApartmentInfoForm(forms.Form):
             'class': 'form-select'
         })
     )
+    room_type = forms.ChoiceField(
+        required=True,
+        choices=choices_from_array(rent_categories['room_type']),
+        widget=forms.Select(attrs={
+            'type': 'text',
+            'class': 'form-select'
+        })
+    )
     rooms = forms.IntegerField(
         required=True,
         widget=forms.TextInput(attrs={
@@ -58,6 +67,13 @@ class ApartmentInfoForm(forms.Form):
         })
     )
     area_m2 = forms.IntegerField(
+        required=True,
+        widget=forms.TextInput(attrs={
+            'type': 'number',
+            'class': 'form-control',
+        })
+    )
+    accommodates = forms.IntegerField(
         required=True,
         widget=forms.TextInput(attrs={
             'type': 'number',

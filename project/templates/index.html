@@ -24,8 +24,14 @@
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
-    {% if price_prediction %}
-      <p class="fs-4 my-3">Price prediction: €{{ price_prediction }}</p>
+    {% if prediction_made %}
+      <p class="fs-4 my-3">Property analysis:</p>
+      <ul class="list-group">
+        <li class="list-group-item">Suggested price: €{{ price_prediction }}</li>
+        <li class="list-group-item">Actual price: €{{ actual_price }}</li>
+        <li class="list-group-item">Difference: €{{ price_difference }}</li>
+        <li class="list-group-item">Rent prediction (per night): €{{ rent_prediction }}</li>
+      </ul>
     {% endif %}
 
   </div>
