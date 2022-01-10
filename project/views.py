@@ -3,6 +3,7 @@ from django.shortcuts import render
 from project.forms import ApartmentInfoForm
 from project.price_predictor import PricePredictor
 from project.rent_predictor import RentPredictor
+from project.openai_api import gpt3
 
 price_predictor = PricePredictor()
 rent_predictor = RentPredictor()
@@ -43,6 +44,20 @@ def index(request):
                 rent_prediction = rent_predictor.predict(
                     room_type, district, accommodates, rooms
                 )
+                gpt3_output = gpt3(
+                    neighborhood,
+                    condition,
+                    apt_type,
+                    area_m2,
+                    lift,
+                    views,
+                    floor,
+                    room_type,
+                    accommodates,
+                    district,
+                    rooms,
+                    price
+                )
 
                 context = {
                     'prediction_made': True,
@@ -51,6 +66,7 @@ def index(request):
                     'rent_prediction': rent_prediction,
                     'actual_price': price,
                     'price_difference': price_prediction - price,
+                    'gpt3_output': gpt3_output,
                 }
                 return render(request, 'index.html', context)
 

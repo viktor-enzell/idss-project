@@ -17,7 +17,8 @@ class ApartmentInfoForm(forms.Form):
         widget=forms.TextInput(attrs={
             'type': 'number',
             'class': 'form-control',
-        })
+        }),
+        initial=100000,
     )
     district = forms.ChoiceField(
         required=True,
@@ -64,21 +65,24 @@ class ApartmentInfoForm(forms.Form):
         widget=forms.TextInput(attrs={
             'type': 'number',
             'class': 'form-control',
-        })
+        }),
+        initial=1,
     )
     area_m2 = forms.IntegerField(
         required=True,
         widget=forms.TextInput(attrs={
             'type': 'number',
             'class': 'form-control',
-        })
+        }),
+        initial=30,
     )
     accommodates = forms.IntegerField(
         required=True,
         widget=forms.TextInput(attrs={
             'type': 'number',
             'class': 'form-control',
-        })
+        }),
+        initial=2,
     )
     lift = forms.ChoiceField(
         required=True,
