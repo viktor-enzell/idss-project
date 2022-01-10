@@ -3,10 +3,12 @@ from django.shortcuts import render
 from project.forms import ApartmentInfoForm
 from project.price_predictor import PricePredictor
 from project.rent_predictor import RentPredictor
+from project.wacc_predictor import WaccPredictor
 from project.openai_api import gpt3
 
 price_predictor = PricePredictor()
 rent_predictor = RentPredictor()
+wacc_predictor = WaccPredictor()
 
 
 def index(request):
@@ -29,6 +31,10 @@ def index(request):
                 # Rent prediction features
                 room_type = apartment_info_form.cleaned_data.get('room_type')
                 accommodates = apartment_info_form.cleaned_data.get('accommodates')
+
+                # wacc prediction features
+                interest_rate = apartment_info_form.cleaned_data.get('interest_rate')
+                loan_size = apartment_info_form.cleaned_data.get('loan_size')
 
                 # Shared features
                 district = apartment_info_form.cleaned_data.get('district')
@@ -59,6 +65,9 @@ def index(request):
                     price
                 )
 
+                wacc_prediction = wacc_predictor.predict(
+                    interest_rate, loan_size, price
+                )
                 context = {
                     'prediction_made': True,
                     'apartment_info_form': apartment_info_form,
@@ -66,6 +75,7 @@ def index(request):
                     'rent_prediction': rent_prediction,
                     'actual_price': price,
                     'price_difference': price_prediction - price,
+                    'wacc_prediction': round(wacc_prediction, 4),
                     'gpt3_output': gpt3_output,
                 }
                 return render(request, 'index.html', context)

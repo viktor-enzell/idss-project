@@ -108,3 +108,19 @@ class ApartmentInfoForm(forms.Form):
             'class': 'form-select'
         })
     )
+
+    interest_rate = forms.FloatField(
+        required=True,
+        widget=forms.TextInput(attrs={
+            'type': 'float',
+            'class': 'form-control',
+        })
+    )
+
+    loan_size = forms.IntegerField(
+        required=True,
+        widget=forms.TextInput(attrs={
+            'type': 'number',
+            'class': 'form-control',
+        })
+    )
