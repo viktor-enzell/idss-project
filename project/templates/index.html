@@ -6,23 +6,22 @@
 
     <h1 class="fs-2 text-center mb-4">IDSS</h1>
 
-    <p class="fs-4 mb-3">Apartment information</p>
-
-    <form action="/" method="get">
-      {% csrf_token %}
-      {{ apartment_info_form.non_field_errors }}
-      {% for field in apartment_info_form %}
-        <div class="mb-3">
-          {{ field.errors }}
-          <label class="form-label" for="{{ field.auto_id }}">{{ field.label }}</label>
-          {{ field }}
-          {% if field.help_text %}
-            <div class="form-text">{{ field.help_text|safe }}</div>
-          {% endif %}
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                  aria-expanded="true" aria-controls="collapseOne">
+            Apartment information
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+             data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            {% include "form_fields.html" %}
+          </div>
         </div>
-      {% endfor %}
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+      </div>
+    </div>
 
     {% if prediction_made %}
       <p class="fs-4 my-3">Property analysis:</p>
