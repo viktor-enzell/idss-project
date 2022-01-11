@@ -81,7 +81,7 @@ def index(request):
                     'rent_prediction': rent_prediction,
                     'actual_price': price,
                     'price_difference': price_prediction - price,
-                    'wacc_prediction': round(wacc_prediction, 4),
+                    'wacc_prediction': round(wacc_prediction * 100, 4),
                     'gpt3_output': gpt3_output,
                 }
                 return render(request, 'index.html', context)

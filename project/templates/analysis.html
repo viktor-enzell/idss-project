@@ -16,16 +16,16 @@
     </div>
 
     <div class="row my-4">
-      <div class="col-7 p-0">
+      <div class="col-6">
         <img src="{% static 'tmp.png' %}" alt="Boxplot" style="width: 100%">
       </div>
-      <div class="col-5 mt-2">
+      <div class="col-6 mt-2 ps-0">
         <ul class="list-group">
           <li class="list-group-item">Suggested price: €{{ price_prediction }}</li>
           <li class="list-group-item">Actual price: €{{ actual_price }}</li>
           <li class="list-group-item">Difference: €{{ price_difference }}</li>
           <li class="list-group-item">Rent prediction: €{{ rent_prediction }} per night</li>
-          <li class="list-group-item">Weighted average capital cost: {{ wacc_prediction }}</li>
+          <li class="list-group-item">Weighted average capital cost: {{ wacc_prediction }}%</li>
         </ul>
       </div>
     </div>
