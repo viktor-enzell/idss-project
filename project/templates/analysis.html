@@ -1,0 +1,39 @@
+{% load static %}
+
+
+<div class="card shadow-sm my-4">
+  <div class="card-body">
+
+    <div class="row">
+      <div class="col-11">
+        <p class="fs-4 mb-4">Profitability analysis for apartment in {{ district }}</p>
+      </div>
+      <div class="col-1 text-end">
+        <form action="/">
+          <button type="submit" class="btn-close" aria-label="Close"></button>
+        </form>
+      </div>
+    </div>
+
+    <div class="row my-4">
+      <div class="col-6">
+        <ul class="list-group">
+          <li class="list-group-item">Suggested price: €{{ price_prediction }}</li>
+          <li class="list-group-item">Actual price: €{{ actual_price }}</li>
+          <li class="list-group-item">Difference: €{{ price_difference }}</li>
+          <li class="list-group-item">Rent prediction: €{{ rent_prediction }} per night</li>
+          <li class="list-group-item">Weighted average capital cost: {{ wacc_prediction }}</li>
+        </ul>
+      </div>
+      <div class="col-6">
+        <img src="{% static 'tmp.png' %}" alt="Boxplot" style="width: 100%">
+      </div>
+    </div>
+
+    {% if gpt3_output %}
+      <hr class="border-1 border-top border-secondary">
+      <p class="fs-5 mt-4">Rental listing draft created by GPT-3</p>
+      <p>{{ gpt3_output }}"</p>
+    {% endif %}
+  </div>
+</div>

@@ -71,6 +71,7 @@ def index(request):
                 context = {
                     'prediction_made': True,
                     'apartment_info_form': apartment_info_form,
+                    'district': district,
                     'price_prediction': price_prediction,
                     'rent_prediction': rent_prediction,
                     'actual_price': price,

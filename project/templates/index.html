@@ -4,9 +4,26 @@
 {% block content %}
   <div class="container py-4" style="max-width: 760px;">
 
-    <h1 class="fs-2 text-center mb-4">IDSS</h1>
+    <h1 class="fs-3 text-center mb-4">Barcelona apartment investments analysis</h1>
 
-    <div class="accordion" id="accordionExample">
+    {% if not prediction_made %}
+      <div class="card shadow-sm my-4">
+        <div class="card-body border-5 rounded border-start border-primary">
+          <h5 class="card-title">Usage</h5>
+          <p class="card-text">
+            Add information about an apartment in Barcelona that you intend to buy and rent out as an
+            investment. The property information will get analyzed and you will be provided with valuable
+            information about the profitability of the investment.
+          </p>
+        </div>
+      </div>
+    {% endif %}
+
+    {% if prediction_made %}
+      {% include "analysis.html" %}
+    {% endif %}
+
+    <div class="accordion shadow-sm" id="accordionExample">
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingOne">
           <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
@@ -22,20 +39,6 @@
         </div>
       </div>
     </div>
-
-    {% if prediction_made %}
-      <p class="fs-4 my-3">Property analysis:</p>
-      <ul class="list-group">
-        <li class="list-group-item">Suggested price: €{{ price_prediction }}</li>
-        <li class="list-group-item">Actual price: €{{ actual_price }}</li>
-        <li class="list-group-item">Difference: €{{ price_difference }}</li>
-        <li class="list-group-item">Rent prediction (per night): €{{ rent_prediction }}</li>
-        <li class="list-group-item">Weighted average capital cost: {{ wacc_prediction }}</li>
-      </ul>
-      {% if gpt3_output %}
-        <p class="my-3">Suggested summary: "{{ gpt3_output }}"</p>
-      {% endif %}
-    {% endif %}
 
   </div>
 {% endblock %}
