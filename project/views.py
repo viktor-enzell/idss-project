@@ -5,10 +5,12 @@ from project.price_predictor import PricePredictor
 from project.rent_predictor import RentPredictor
 from project.openai_api import gpt3
 from project.wacc_predictor import WaccPredictor
+from project.profit_predictor import ProfitPredictor
 
 price_predictor = PricePredictor()
 rent_predictor = RentPredictor()
 wacc_predictor = WaccPredictor()
+profit_predictor = ProfitPredictor()
 
 
 def index(request):
@@ -52,6 +54,9 @@ def index(request):
                 )
                 wacc_prediction = wacc_predictor.predict(
                     interest_rate, loan_size, price
+                )
+                profit_predictor.predict(
+                    interest_rate, loan_size, price_prediction, price, wacc_prediction, rent_prediction
                 )
                 gpt3_output = gpt3(
                     neighborhood,
