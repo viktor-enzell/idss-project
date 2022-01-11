@@ -4,9 +4,11 @@ from project.forms import ApartmentInfoForm
 from project.price_predictor import PricePredictor
 from project.rent_predictor import RentPredictor
 from project.openai_api import gpt3
+from project.wacc_predictor import WaccPredictor
 
 price_predictor = PricePredictor()
 rent_predictor = RentPredictor()
+wacc_predictor = WaccPredictor()
 
 
 def index(request):
@@ -17,6 +19,10 @@ def index(request):
         if request.GET.get('price', False):
             apartment_info_form = ApartmentInfoForm(request.GET)
             if apartment_info_form.is_valid():
+                # wacc prediction features
+                interest_rate = apartment_info_form.cleaned_data.get('interest_rate')
+                loan_size = apartment_info_form.cleaned_data.get('loan_size')
+
                 # Price prediction features
                 neighborhood = apartment_info_form.cleaned_data.get('neighborhood')
                 condition = apartment_info_form.cleaned_data.get('condition')
@@ -44,6 +50,9 @@ def index(request):
                 rent_prediction = rent_predictor.predict(
                     room_type, district, accommodates, rooms
                 )
+                wacc_prediction = wacc_predictor.predict(
+                    interest_rate, loan_size, price
+                )
                 gpt3_output = gpt3(
                     neighborhood,
                     condition,
@@ -66,6 +75,7 @@ def index(request):
                     'rent_prediction': rent_prediction,
                     'actual_price': price,
                     'price_difference': price_prediction - price,
+                    'wacc_prediction': round(wacc_prediction, 4),
                     'gpt3_output': gpt3_output,
                 }
                 return render(request, 'index.html', context)

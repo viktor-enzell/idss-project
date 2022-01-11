@@ -30,6 +30,7 @@
         <li class="list-group-item">Actual price: €{{ actual_price }}</li>
         <li class="list-group-item">Difference: €{{ price_difference }}</li>
         <li class="list-group-item">Rent prediction (per night): €{{ rent_prediction }}</li>
+        <li class="list-group-item">Weighted average capital cost: {{ wacc_prediction }}</li>
       </ul>
       {% if gpt3_output %}
         <p class="my-3">Suggested summary: "{{ gpt3_output }}"</p>
