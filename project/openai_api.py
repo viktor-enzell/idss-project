@@ -34,12 +34,12 @@ def gpt3(neighborhood,
              f'* Price: {price}\n' \
              f'I wrote the following sales pitch that includes the information about the house:\n'
 
-    response = openai.Completion.create(
-        engine='davinci',
-        prompt=prompt,
-        max_tokens=max_tokens
-    )
     try:
+        response = openai.Completion.create(
+            engine='davinci',
+            prompt=prompt,
+            max_tokens=max_tokens
+        )
         return response['choices'][0]['text']
     except Exception as e:
         print(e)
