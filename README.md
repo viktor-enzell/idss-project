@@ -1,4 +1,4 @@
-# Barcelona Apartment Investment Analysis
+# Barcelona Property Investment Analysis
 An application for analyzing the profitability of apartment investments in Barcelona. The app is built as a Django website where a user inputs information about a potential apartment investment. The app then analyzes the data and uses machine learning models to give insight into the potential profitability of the investment.
 
 
