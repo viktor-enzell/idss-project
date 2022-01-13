@@ -4,34 +4,26 @@ import openai
 
 def gpt3(neighborhood,
          condition,
-         apt_type,
          area_m2,
-         lift,
          views,
          floor,
-         room_type,
          accommodates,
          district,
          rooms,
-         price,
-         max_tokens=80):
+         max_tokens=120):
     # Load your API key from an environment variable or secret management service
     openai.api_key = os.getenv('OPENAI_API_KEY')
 
     prompt = f'My customer asked me to write a descriptive sales pitch for his ' \
              f'house containing the following attributes: \n' \
+             f'* District: {district}\n' \
              f'* Neighbourhood: {neighborhood}\n' \
              f'* Condition: {condition}\n' \
-             f'* Apartment type: {apt_type}\n' \
-             f'* Area: {area_m2}m2\n' \
-             f'* Lift: {lift}\n' \
+             f'* Area: {area_m2} m2\n' \
              f'* Views: {views}\n' \
              f'* Floor: {floor}\n' \
-             f'* Room type: {room_type}\n' \
-             f'* Bedrooms: {accommodates}\n' \
-             f'* District: {district}\n' \
              f'* Rooms: {rooms}\n' \
-             f'* Price: {price}\n' \
+             f'* Bedrooms: {accommodates}\n' \
              f'I wrote the following sales pitch that includes the information about the house:\n'
 
     try:

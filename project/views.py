@@ -61,12 +61,9 @@ def index(request):
                 gpt3_output = gpt3(
                     neighborhood,
                     condition,
-                    apt_type,
                     area_m2,
-                    lift,
                     views,
                     floor,
-                    room_type,
                     accommodates,
                     district,
                     rooms,
